@@ -42,7 +42,18 @@ for cat in categories:
 
     response = model.generate_content(prompt)
     all_new_content += response.text + "\n"
-
+# New Social Media Logic
+    social_prompt = f"""
+    Write a 'Hook' for a social media post about this {cat} trend.
+    Tone: Provocative, exclusive, and high-status.
+    Format: 
+    1. A shocking headline (max 7 words)
+    2. A bullet point of what the reader is missing.
+    3. The link: 'Read the full Dispatch at monograph.intelligence' (replace with your URL)
+    """
+    social_response = model.generate_content(social_prompt)
+    print(f"--- SOCIAL HOOK FOR {cat.upper()} ---")
+    print(social_response.text)
 # Read and Update HTML
 with open("index.html", "r") as f:
     html = f.read()
