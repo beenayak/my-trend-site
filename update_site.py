@@ -7,30 +7,24 @@ model = genai.GenerativeModel('gemini-1.5-flash')
 
 # Added 'ai' to the list
 categories = ['health', 'capital', 'tech', 'ai']
-all_new_content = ""
-
 for cat in categories:
-    print(f"Generating report for {cat}...")
-    
-    # Specific instruction for the AI category to keep it fancy
-    topic_focus = "breakthroughs in neural networks and synthetic logic" if cat == 'ai' else f"breakthroughs in the {cat} sector"
-
     prompt = f"""
-    ACT AS: A Lead Editor at 'Monograph Private Lab'.
-    TASK: Research one breakthrough trend specifically regarding {topic_focus}.
-    
-    HTML OUTPUT REQUIREMENTS:
-    <div class="filter-item filter-{cat} group cursor-pointer mb-20" data-aos="fade-up">
-        <div class="aspect-[3/4] overflow-hidden bg-slate-100 mb-8">
-            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800" class="object-cover w-full h-full grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000">
+    ACT AS: Lead Strategic Analyst at SIGNAL. Research Labs.
+    IDENTITY: You find "Signals" (trends) before they become "Noise" (mainstream).
+    TONE: Sharp, clinical, high-status.
+
+    HTML FORMATTING:
+    <div class="filter-item filter-{cat} group mb-20" data-aos="fade-up">
+        <div class="aspect-square overflow-hidden bg-slate-900 mb-8 rounded-none">
+            <img src="[UNSPLASH_URL]" class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100">
         </div>
-        <div class="flex items-center space-x-2 mb-4">
-            <span class="w-8 h-[1px] bg-slate-900"></span>
-            <span class="text-[10px] font-bold uppercase tracking-widest">{cat if cat != 'ai' else 'Synthetic Intelligence'} // Dispatch</span>
+        <div class="flex items-center space-x-2 mb-6">
+            <span class="w-4 h-4 bg-black rounded-full flex items-center justify-center text-[8px] text-white font-bold">!</span>
+            <span class="text-[9px] font-black uppercase tracking-[0.3em]">{cat if cat != 'ai' else 'Intelligence'} // Verified Signal</span>
         </div>
-        <h3 class="text-4xl font-bold mb-6 leading-[1.1]">[TREND_TITLE]</h3>
-        <p class="text-slate-500 text-sm leading-relaxed mb-8">[STORY_CONTENT]</p>
-        <a href="recommendations.html" class="text-[10px] font-black uppercase tracking-widest border-b-2 border-black pb-1 hover:text-slate-400 hover:border-slate-400 transition-all">Open Report →</a>
+        <h3 class="text-3xl font-black mb-6 leading-tight uppercase tracking-tighter">[TREND_TITLE]</h3>
+        <p class="text-slate-500 text-xs leading-relaxed mb-8 uppercase tracking-wider font-medium">[STORY_CONTENT]</p>
+        <a href="recommendations.html" class="text-[9px] font-black uppercase tracking-[0.4em] border-b-2 border-black pb-1 hover:text-slate-400 hover:border-slate-400 transition-all">Decipher Report →</a>
     </div>
 
     WRITING RULES:
