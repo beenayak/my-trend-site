@@ -26,18 +26,26 @@
         </div>
     </div>
 
-    <nav class="py-12 px-8 flex justify-between items-center max-w-7xl mx-auto">
-        <div class="flex items-center">
-            <span class="live-dot"></span>
-            <div class="text-3xl font-black tracking-tighter cursor-pointer uppercase" onclick="window.location.reload()">Signal.</div>
-        </div>
-        <div class="flex space-x-8 uppercase tracking-widest">
+   <!-- Navigation with High-Contrast Button -->
+<nav class="py-12 px-8 flex justify-between items-center max-w-7xl mx-auto">
+    <div class="flex items-center">
+        <span class="live-dot"></span>
+        <div class="text-3xl font-black tracking-tighter cursor-pointer uppercase" onclick="window.location.reload()">Signal.</div>
+    </div>
+    
+    <!-- Desktop Menu -->
+    <div class="hidden md:flex items-center space-x-12">
+        <div class="flex space-x-8 uppercase tracking-widest font-bold">
             <button onclick="filterSelection('all')" class="filter-btn active">Feed</button>
             <button onclick="filterSelection('ai')" class="filter-btn">Intelligence</button>
             <button onclick="filterSelection('capital')" class="filter-btn">Capital</button>
-            <button onclick="filterSelection('health')" class="filter-btn">Health</button>
         </div>
-    </nav>
+        <!-- THE REDESIGNED BUTTON -->
+        <a href="recommendations.html" class="bg-black text-white px-6 py-3 text-[10px] font-black uppercase tracking-[0.3em] hover:bg-slate-800 transition-all">
+            The Stack →
+        </a>
+    </div>
+</nav>
 
    <header class="max-w-5xl mx-auto py-32 px-6 text-center" data-aos="fade">
     <h1 class="text-7xl md:text-[10rem] font-black leading-none mb-12 tracking-tighter uppercase">Clear the <br><span class="text-slate-200">Noise.</span></h1>
