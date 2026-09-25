@@ -28,6 +28,6 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add index.html
-          git commit -m "AI updated the site with new trends"
+          git add index.html log.csv
+          git commit -m "SIGNAL: Daily Intelligence Log Updated"
           git push
