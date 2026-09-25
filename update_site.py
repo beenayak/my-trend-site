@@ -7,13 +7,24 @@ model = genai.GenerativeModel('gemini-1.5-flash')
 
 # 1. Ask Gemini for the latest trend
 prompt = """
-Find a trending 'AI Productivity' or 'Bio-hacking' topic for today. 
-Write a website HTML block for it. 
-Include: 
-- A catchy title
-- A 2-sentence summary
-- A placeholder for a relevant Unsplash image URL.
-Format it exactly as a <div> block using Tailwind CSS classes.
+ACT AS: A senior investigative tech journalist with a sharp, punchy, and slightly cynical tone (like Wired or Vice).
+
+TASK:
+1. Research one micro-trend in AI or Biohacking.
+2. Write a 400-word article. 
+3. HUMAN-LIKE WRITING RULES:
+   - START with a provocative question or a startling fact.
+   - NO "In conclusion," "Furthermore," or "Moreover." (Those are AI dead giveaways).
+   - USE "Burstiness": Mix very short sentences (under 5 words) with longer, descriptive ones.
+   - USE "Perplexity": Use rare adjectives and specific industry jargon.
+   - PLAGIARISM CHECK: Do not summarize one article; synthesize data from three imaginary sources to create a unique perspective.
+
+4. THE BRIDGE: 
+   - At the end, add a button: <a href="recommendations.html" class="inline-block bg-blue-600 text-white px-6 py-3 rounded-2xl font-bold hover:bg-blue-700 transition mt-6">Access the Research Stack →</a>
+
+OUTPUT: 
+- Return ONLY the HTML <div> block. 
+- Ensure all text is inside the div.
 """
 
 response = model.generate_content(prompt)
