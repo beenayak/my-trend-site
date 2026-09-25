@@ -8,14 +8,13 @@ model = genai.GenerativeModel('gemini-1.5-flash')
 # Added 'ai' to the list
 categories = ['health', 'capital', 'tech', 'ai']
 for cat in categories:
-    prompt = f"""
+   prompt = f"""
     ACT AS: Lead Strategic Analyst at SIGNAL. Research Labs.
-    IDENTITY: You find "Signals" (trends) before they become "Noise" (mainstream).
-    TONE: Sharp, clinical, high-status.
-
-    HTML FORMATTING:
+    TASK: Research one breakthrough trend specifically regarding {cat}.
+    
+    HTML OUTPUT REQUIREMENTS (YOU MUST INCLUDE THE BUTTON):
     <div class="filter-item filter-{cat} group mb-20" data-aos="fade-up">
-        <div class="aspect-square overflow-hidden bg-slate-900 mb-8 rounded-none">
+        <div class="aspect-square overflow-hidden bg-slate-900 mb-8">
             <img src="[UNSPLASH_URL]" class="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 opacity-80 group-hover:opacity-100">
         </div>
         <div class="flex items-center space-x-2 mb-6">
@@ -23,15 +22,19 @@ for cat in categories:
             <span class="text-[9px] font-black uppercase tracking-[0.3em]">{cat if cat != 'ai' else 'Intelligence'} // Verified Signal</span>
         </div>
         <h3 class="text-3xl font-black mb-6 leading-tight uppercase tracking-tighter">[TREND_TITLE]</h3>
-        <p class="text-slate-500 text-xs leading-relaxed mb-8 uppercase tracking-wider font-medium">[STORY_CONTENT]</p>
-        <a href="recommendations.html" class="text-[9px] font-black uppercase tracking-[0.4em] border-b-2 border-black pb-1 hover:text-slate-400 hover:border-slate-400 transition-all">Decipher Report →</a>
+        <p class="text-slate-500 text-xs leading-relaxed mb-10 uppercase tracking-wider font-medium">[STORY_CONTENT]</p>
+        
+        <!-- THE REDESIGNED BUTTON -->
+        <a href="recommendations.html" class="inline-block w-full text-center bg-black text-white text-[10px] font-black uppercase tracking-[0.4em] py-5 hover:bg-slate-800 transition-all shadow-xl">
+            Access Protocol →
+        </a>
     </div>
 
     WRITING RULES:
-    - If the category is 'ai', talk about it as a 'shift in synthetic reasoning' or 'computational evolution'.
-    - DO NOT use words like 'chatbot', 'AI-powered', or 'revolutionary'.
-    - Use sophisticated, punchy language.
-    - Find a high-end, abstract Unsplash image URL that fits the {cat} theme.
+    - Replace [TREND_TITLE] with a 3-word aggressive title.
+    - Replace [STORY_CONTENT] with 3 sophisticated sentences.
+    - Use a real Unsplash URL for {cat}.
+    
     """
 
     response = model.generate_content(prompt)
