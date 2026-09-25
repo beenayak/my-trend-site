@@ -3,51 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Trend Intelligence | Future-Proof Your Life</title>
+    <title>MONOGRAPH | Global Intelligence Dispatch</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Inter', sans-serif; }</style>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #fdfdfd; }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+        .gradient-text { background: linear-gradient(to right, #1a1a1a, #4a4a4a); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-hover:hover { transform: translateY(-10px); box-shadow: 0 30px 60px -12px rgba(50, 50, 93, 0.15); }
+    </style>
 </head>
-<body class="bg-slate-50 text-slate-900">
+<body class="text-slate-900">
 
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 p-4">
-        <div class="max-w-6xl mx-auto flex justify-between items-center">
-            <div class="text-2xl font-black tracking-tighter text-blue-600">TREND<span class="text-slate-400">PULSE</span></div>
-            <div class="hidden md:flex space-x-8 font-medium">
-                <a href="#" class="hover:text-blue-600 transition">Tech</a>
-                <a href="#" class="hover:text-blue-600 transition">Health</a>
-                <a href="#" class="hover:text-blue-600 transition">Finance</a>
+    <!-- Top Minimal Navigation -->
+    <nav class="border-b border-slate-100 py-8 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="text-xs uppercase tracking-[0.5em] font-bold">Volume 01 // 2026</div>
+            <div class="text-4xl font-black tracking-tighter italic">Monograph.</div>
+            <div class="space-x-6 text-xs uppercase tracking-widest font-bold">
+                <a href="#" class="hover:text-slate-500">Dispatch</a>
+                <a href="recommendations.html" class="hover:text-slate-500">The Stack</a>
             </div>
-            <button class="bg-blue-600 text-white px-5 py-2 rounded-full font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-200">Subscribe</button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="max-w-6xl mx-auto pt-20 pb-12 px-4 text-center">
-        <span class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-bold tracking-wide uppercase">AI-Powered Intelligence</span>
-        <h1 class="text-5xl md:text-7xl font-black mt-6 mb-8 tracking-tight">The Future, <span class="text-blue-600">Automated.</span></h1>
-        <p class="text-xl text-slate-600 max-w-2xl mx-auto">We use Google Gemini 1.5 Pro to analyze global data and predict the next big trends before they happen.</p>
+    <!-- Editorial Hero -->
+    <header class="max-w-5xl mx-auto pt-24 pb-20 px-6 text-center">
+        <h1 class="text-6xl md:text-8xl font-black leading-tight gradient-text">The future, <br><span class="italic">unfiltered.</span></h1>
+        <div class="mt-10 flex justify-center items-center space-x-4">
+            <span class="h-[1px] w-12 bg-slate-300"></span>
+            <p class="text-sm uppercase tracking-[0.3em] text-slate-400 font-medium">Global Trend Intelligence</p>
+            <span class="h-[1px] w-12 bg-slate-300"></span>
+        </div>
     </header>
 
-    <!-- Content Grid -->
-    <main class="max-w-6xl mx-auto px-4 pb-20">
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="trend-container">
-            <!-- ARTICLE 1 -->
-            <div class="bg-white rounded-3xl p-6 shadow-xl shadow-slate-200/50 border border-slate-100 hover:-translate-y-2 transition duration-300">
-                <div class="h-48 bg-slate-200 rounded-2xl mb-4 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800');"></div>
-                <span class="text-blue-600 font-bold text-sm">BIO-HACKING</span>
-                <h3 class="text-2xl font-bold mt-2 leading-tight">AI-Driven Circadian Rhythm Optimization</h3>
-                <p class="text-slate-500 mt-4 text-sm leading-relaxed">How remote workers are using Gemini to automate their sleep and light exposure for 2x productivity...</p>
-                <button class="mt-6 font-bold text-blue-600 flex items-center group">Read Report <span class="ml-2 group-hover:translate-x-1 transition">→</span></button>
-            </div>
-
-            <!-- More articles will be injected here by the automation -->
+    <!-- Main Feed -->
+    <main class="max-w-7xl mx-auto px-6 pb-32">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16" id="trend-container">
+            <!-- DYNAMIC CONTENT INJECTED HERE -->
         </div>
     </main>
 
-    <footer class="bg-slate-900 text-slate-400 py-12 px-4 text-center">
-        <p>© 2026 TrendPulse AI. Built with Google AI Studio.</p>
+    <!-- Fancy Footer -->
+    <footer class="bg-[#0a0a0a] text-white py-20 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 border-b border-white/10 pb-20">
+            <div>
+                <div class="text-3xl font-black italic mb-6">Monograph.</div>
+                <p class="text-slate-400 text-sm leading-relaxed">A private research laboratory dedicated to the exploration of high-performance living and future technologies.</p>
+            </div>
+            <div></div>
+            <div class="text-right">
+                <p class="text-xs uppercase tracking-widest text-slate-500 mb-4">Newsletter Dispatch</p>
+                <input type="email" placeholder="Email Address" class="bg-transparent border-b border-white/30 py-2 w-full focus:outline-none focus:border-white transition">
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-10 text-[10px] uppercase tracking-widest text-slate-600">
+            &copy; 2026 Monograph Private Lab. All rights reserved. No part of this publication may be reproduced without permission.
+        </div>
     </footer>
 
 </body>
