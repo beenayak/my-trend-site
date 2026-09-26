@@ -12,7 +12,7 @@ def run_protocol():
 
     try:
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-1.5-flash')
+       model = genai.GenerativeModel('models/gemini-1.5-flash-latest')
     except Exception as e:
         print(f"❌ ERROR: Failed to initialize Gemini: {e}")
         return
