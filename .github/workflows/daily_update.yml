@@ -1,17 +1,22 @@
 name: Daily AI Content Update
+
 on:
   schedule:
+    # This runs the script every day at 00:00 UTC (Midnight)
     - cron: '0 0 * * *'
+  # This allows you to run it manually whenever you want
   workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Added permissions to allow the bot to write to your repo
+    
+    # CRITICAL: Grant the bot permission to save changes to your repo
     permissions:
       contents: write
+
     steps:
-      - name: Checkout code
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
       - name: Set up Python
@@ -19,20 +24,28 @@ jobs:
         with:
           python-version: '3.9'
 
-      - name: Install dependencies
+      - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
           pip install google-generativeai
 
-      - name: Run AI script
+      - name: Execute SIGNAL AI Script
         env:
+          # This pulls your API key from the "Secrets" we set up earlier
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python update_site.py
 
-      - name: Commit changes
+      - name: Sync Files to Repository
         run: |
+          # Identity of the bot making the changes
           git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.name "SIGNAL-Bot"
+          
+          # Add all files that the AI might have updated
           git add index.html log.csv sitemap.xml
-          git commit -m "SIGNAL: Daily Log & Sitemap Update" || echo "No changes to commit"
+          
+          # Commit the changes. If there are no changes, it will skip without erroring.
+          git commit -m "SIGNAL: Intelligence Dispatch Updated [Automated]" || echo "No signals to update today."
+          
+          # Push the changes back to your main branch
           git push
