@@ -1,99 +1,69 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIGNAL // Global Intelligence Lab</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; background-color: #fdfdfd; cursor: crosshair; }
-        .ticker-wrap { overflow: hidden; white-space: nowrap; background: #000; color: #fff; padding: 8px 0; font-size: 9px; letter-spacing: 2px; font-weight: 900; }
-        .ticker-move { display: inline-block; animation: ticker 40s linear infinite; }
-        @keyframes ticker { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
-        .live-dot { height: 8px; width: 8px; background-color: #10b981; border-radius: 50%; display: inline-block; margin-right: 8px; box-shadow: 0 0 8px #10b981; animation: blink 2s infinite; }
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
-        .filter-btn.active { border-bottom: 2px solid #000; color: #000; }
-        .filter-btn { color: #94a3b8; font-size: 10px; letter-spacing: 2px; font-weight: 700; transition: all 0.3s; }
-    </style>
-</head>
-<body class="text-slate-900 overflow-x-hidden">
+import os
+import google.generativeai as genai
+from datetime import datetime
+import csv
 
-    <div class="ticker-wrap">
-        <div class="ticker-move uppercase">
-            [SIGNAL LIVE] // NEW SYNTHETIC LOGIC DETECTED // CAPITAL FLOWS SHIFTING TO SEMICONDUCTORS // BIO-HACKING PHASE 3 DATA RELEASED // 
-        </div>
-    </div>
+# 1. SETUP
+# Make sure GEMINI_API_KEY is in your GitHub Secrets!
+api_key = os.environ.get("GEMINI_API_KEY")
+if not api_key:
+    raise ValueError("API Key missing! Check your GitHub Secrets.")
 
-   <!-- Navigation with High-Contrast Button -->
-<nav class="py-12 px-8 flex justify-between items-center max-w-7xl mx-auto">
-    <div class="flex items-center">
-        <span class="live-dot"></span>
-        <div class="text-3xl font-black tracking-tighter cursor-pointer uppercase" onclick="window.location.reload()">Signal.</div>
-    </div>
-    
-    <!-- Desktop Menu -->
-    <div class="hidden md:flex items-center space-x-12">
-        <div class="flex space-x-8 uppercase tracking-widest font-bold">
-            <button onclick="filterSelection('all')" class="filter-btn active">Feed</button>
-            <button onclick="filterSelection('ai')" class="filter-btn">Intelligence</button>
-            <button onclick="filterSelection('capital')" class="filter-btn">Capital</button>
-        </div>
-        <!-- THE REDESIGNED BUTTON -->
-        <a href="recommendations.html" class="bg-black text-white px-6 py-3 text-[10px] font-black uppercase tracking-[0.3em] hover:bg-slate-800 transition-all">
-            The Stack →
-        </a>
-    </div>
-</nav>
+genai.configure(api_key=api_key)
+model = genai.GenerativeModel('gemini-1.5-flash')
 
-   <header class="max-w-5xl mx-auto py-32 px-6 text-center" data-aos="fade">
-    <h1 class="text-7xl md:text-[10rem] font-black leading-none mb-12 tracking-tighter uppercase">Clear the <br><span class="text-slate-200">Noise.</span></h1>
-    <!-- NEW TAGLINE -->
-    <p class="text-black text-[12px] uppercase tracking-[0.8em] mb-20 font-black">Anticipate the Shift.</p>
-</header>
+categories = ['health', 'capital', 'tech', 'ai']
+all_new_content = ""
+log_entries = []
 
-    <main class="max-w-7xl mx-auto px-6 pb-40">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24" id="trend-container">
-            <!-- AI INJECTION POINT -->
-        </div>
-    </main>
+# 2. THE ENGINE
+for cat in categories:
+    try:
+        print(f"Researching {cat}...")
+        prompt = f"""
+        ACT AS: Lead Strategic Analyst at SIGNAL. Labs.
+        TASK: Research one breakthrough trend regarding {cat}. 
+        Format as a luxury HTML block. Replace [IMAGE] with a real Unsplash URL like https://images.unsplash.com/photo-[ID]?auto=format&fit=crop&q=80&w=800.
+        
+        OUTPUT ONLY THE HTML DIV with class 'filter-item filter-{cat}'. 
+        Include a black 'Access Protocol' button.
+        """
 
-    <footer class="bg-black text-white py-32 px-10">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-end gap-20">
-            <div class="max-w-sm">
-                <div class="text-4xl font-black mb-8 uppercase tracking-tighter">Signal.</div>
-                <p class="text-slate-500 leading-relaxed text-xs uppercase tracking-widest">An elite-tier intelligence service for the modern decision maker.</p>
-            </div>
-            <div class="w-full md:w-1/3">
-                <p class="text-[10px] uppercase tracking-[0.4em] text-slate-500 mb-6 font-bold">Request Access to Private Dispatch</p>
-                <div class="flex border-b border-white/20 pb-2">
-                    <input type="email" placeholder="EMAIL" class="bg-transparent w-full focus:outline-none text-xs uppercase tracking-[0.2em]">
-                    <button class="text-xs font-bold">→</button>
-                </div>
-            </div>
-        </div>
-    </footer>
+        response = model.generate_content(prompt)
+        content = response.text
+        all_new_content += content + "\n"
+        
+        log_entries.append([datetime.now().strftime("%Y-%m-%d"), cat.upper(), "Update Successful", "LIVE"])
+    except Exception as e:
+        print(f"Error researching {cat}: {e}")
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-        function filterSelection(c) {
-            var x, i;
-            x = document.getElementsByClassName("filter-item");
-            if (c == "all") c = "";
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-                if (x[i].className.indexOf(c) > -1) x[i].style.display = "block";
-            }
-            let btns = document.getElementsByClassName("filter-btn");
-            for (let btn of btns) { btn.classList.remove("active"); }
-            event.target.classList.add("active");
-        }
-    </script>
-    <!-- Floating Navigation to Recommendations -->
-<a href="recommendations.html" class="fixed bottom-8 left-8 bg-white border border-slate-200 text-black px-6 py-4 text-[9px] font-black uppercase tracking-[0.4em] shadow-2xl z-[90] hover:bg-black hover:text-white transition-all hidden md:block">
-    View Recommendations Stack // 2026
-</a>
-</body>
-</html>
+# 3. UPDATE index.html
+try:
+    with open("index.html", "r") as f:
+        html = f.read()
+
+    marker = '<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24" id="trend-container">'
+    if marker in html:
+        updated_html = html.replace(marker, marker + "\n" + all_new_content)
+        with open("index.html", "w") as f:
+            f.write(updated_html)
+    else:
+        print("Marker not found in index.html. Check your HTML structure.")
+
+    # 4. UPDATE log.csv
+    with open('log.csv', 'a', newline='') as f:
+        writer = csv.writer(f)
+        writer.writerows(log_entries)
+
+    # 5. SITEMAP
+    sitemap_content = f"""<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+      <url><loc>https://{os.environ.get('GITHUB_ACTOR', 'user')}.github.io/SIGNAL/</loc><lastmod>{datetime.now().strftime('%Y-%m-%d')}</lastmod></url>
+    </urlset>"""
+    with open("sitemap.xml", "w") as f:
+        f.write(sitemap_content)
+
+except Exception as e:
+    print(f"File writing error: {e}")
+
+print("Automation sequence complete.")
