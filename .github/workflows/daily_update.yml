@@ -5,12 +5,6 @@ on:
     - cron: '0 0 * * *'
   workflow_dispatch:
 
-# This 'concurrency' block prevents two versions of your site 
-# from trying to update at the same exact second.
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -35,10 +29,15 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python update_site.py
 
-      - name: Sync to GitHub
+      - name: Sync and Deploy
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "SIGNAL-Bot"
-          git add .
-          # Only push if there are changes
-          git diff --quiet && git diff --staged --quiet || (git commit -m "SIGNAL: Intelligence & Course Update" && git push)
+          
+          # The -A flag catches EVERYTHING. No more pathspec errors.
+          git add -A 
+          
+          # This line prevents the "nothing to commit" error
+          git commit -m "SIGNAL: Daily Intelligence & Course Update" || echo "No changes found"
+          
+          git push
