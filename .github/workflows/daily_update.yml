@@ -1,8 +1,15 @@
 name: Daily AI Content Update
+
 on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
+
+# This 'concurrency' block prevents two versions of your site 
+# from trying to update at the same exact second.
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -28,13 +35,10 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python update_site.py
 
-      - name: Commit and Push
+      - name: Sync to GitHub
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "SIGNAL-Bot"
-          
-          # This adds EVERYTHING that was created or changed
           git add .
-          
-          # This only commits if there are actually changes to save
-          git diff --quiet && git diff --staged --quiet || (git commit -m "SIGNAL: Daily Intelligence & Course Update" && git push)
+          # Only push if there are changes
+          git diff --quiet && git diff --staged --quiet || (git commit -m "SIGNAL: Intelligence & Course Update" && git push)
