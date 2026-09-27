@@ -21,7 +21,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install google-generativeai 
+          pip install google-generativeai
 
       - name: Run AI script
         env:
@@ -32,6 +32,12 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "SIGNAL-Bot"
-          git add index.html log.csv sitemap.xml
-          git commit -m "SIGNAL: Daily Update" || echo "No changes"
+          
+          # This '|| true' trick prevents the error 128 if files are missing
+          git add index.html || true
+          git add log.csv || true
+          git add sitemap.xml || true
+          git add course.html || true
+          
+          git commit -m "SIGNAL: Daily Intelligence & Course Update" || echo "No changes to commit"
           git push
