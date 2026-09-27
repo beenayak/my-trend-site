@@ -28,16 +28,13 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python update_site.py
 
-      - name: Commit changes
+      - name: Commit and Push
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "SIGNAL-Bot"
           
-          # This '|| true' trick prevents the error 128 if files are missing
-          git add index.html || true
-          git add log.csv || true
-          git add sitemap.xml || true
-          git add course.html || true
+          # This adds EVERYTHING that was created or changed
+          git add .
           
-          git commit -m "SIGNAL: Daily Intelligence & Course Update" || echo "No changes to commit"
-          git push
+          # This only commits if there are actually changes to save
+          git diff --quiet && git diff --staged --quiet || (git commit -m "SIGNAL: Daily Intelligence & Course Update" && git push)
