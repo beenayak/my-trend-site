@@ -60,27 +60,27 @@ try:
                 f.write(html.replace(marker, marker + "\n" + all_new_content))
 
     # Update Course Page
-   # Inside the "Update Course Page" section of your update_site.py:
+   # Inside your update_site.py:
     with open("course.html", "w") as f:
         f.write(f"""
         <html><head><script src="https://cdn.tailwindcss.com"></script>
-        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;700&display=swap" rel="stylesheet">
-        <style>body {{ font-family: 'Space Grotesk', sans-serif; background: #000; color: #fff; }}</style></head>
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+        <style>body {{ background:#050505; color:#fff; font-family:'Space Grotesk', sans-serif; }}</style></head>
         <body class="p-10 md:p-24">
-            <nav class="mb-20 flex justify-between border-b border-white/10 pb-10">
-                <div class="text-2xl font-black italic uppercase">Signal Academy.</div>
-                <div class="text-[10px] text-green-400 font-bold uppercase tracking-widest">Session ID: {datetime.now().strftime('%Y%m%d')}</div>
-            </nav>
-            <div class="max-w-3xl mx-auto">
-                <span class="text-white/30 uppercase tracking-[0.5em] text-[10px]">Current Module // Intelligence Synthesis</span>
-                <h1 class="text-6xl font-black mt-4 mb-10 leading-none tracking-tighter uppercase">The Intelligence <br>Protocol.</h1>
-                <div class="glass p-10 rounded-2xl border border-white/10 text-xl leading-relaxed text-white/80 mb-20">
+            <div class="max-w-4xl mx-auto">
+                <nav class="mb-20 flex justify-between items-center border-b border-white/5 pb-10">
+                    <div class="text-xl font-black italic uppercase tracking-tighter">Signal Academy.</div>
+                    <div class="text-[10px] text-green-400 font-bold uppercase tracking-widest">Protocol ID: {datetime.now().strftime('%Y%m%d')}</div>
+                </nav>
+                <span class="text-white/20 uppercase tracking-[0.5em] text-[10px] font-bold">Daily Intelligence Masterclass</span>
+                <h1 class="text-6xl md:text-8xl font-black mt-6 mb-12 leading-tight tracking-tighter uppercase italic">The Shift<br>Protocol.</h1>
+                <div class="bg-white/5 p-12 rounded-[2rem] border border-white/5 text-xl leading-relaxed text-slate-300 mb-20 shadow-2xl">
                     {course_lesson}
                 </div>
-                <div class="bg-white text-black p-12 rounded-3xl text-center">
-                    <h2 class="text-4xl font-black uppercase mb-4 tracking-tighter">Get the Full 365-Day Curriculum</h2>
-                    <p class="mb-10 text-black/60 font-bold uppercase tracking-widest text-xs">Unlock all signals + private community access</p>
-                    <a href="https://gumroad.com" class="inline-block bg-black text-white px-10 py-5 rounded-full font-black uppercase tracking-widest hover:bg-green-500 transition shadow-2xl">Buy Full Certification // $97</a>
+                <div class="bg-white text-black p-16 rounded-[3rem] text-center shadow-[0_0_50px_rgba(255,255,255,0.1)]">
+                    <h2 class="text-5xl font-black uppercase mb-6 tracking-tighter">Own the Intelligence.</h2>
+                    <p class="mb-12 text-black/50 font-bold uppercase tracking-widest text-xs">Unlock the full 365-day archive + private group access.</p>
+                    <a href="https://gumroad.com" class="inline-block bg-black text-white px-12 py-6 rounded-full font-black uppercase tracking-widest hover:scale-105 transition shadow-2xl">Get Certified // $97</a>
                 </div>
             </div>
         </body></html>
